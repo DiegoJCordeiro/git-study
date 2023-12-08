@@ -31,6 +31,8 @@ homolog branch (Test/Qa), development (Development/Developer).
                         - Identifica o nome do usuário nas configurações do git.
                 - core.editor (property)
                         - Identifica qual o editor de texto padrão que será utilizado pelo git.
+		- init.defaultbranch
+			- Identifica qual a branch padrão que será utilizado pelo git.
 		- Observação: Antes de utilizar qualquer property, deve-se dizer em qual escopo ela será utilizada.
 	- git init
 		- Utilizado para iniciar um repositório localmente.
