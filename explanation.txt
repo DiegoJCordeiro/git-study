@@ -1,0 +1,117 @@
+Git Estudos
+
+- Configuração
+	- URL: https://git-scm.com/
+- Plataformas de hospedagem de código e colabaração sob controle de versão
+	- Github
+	- Bitbucket
+	- Gitlab
+	- E mais ...
+- Repositório
+	- Onde depositamos os arquivos dos projetos.
+	- Através do repositório, também conseguimos fazer o controle das versões do arquivos.
+- Branch
+	- São ramificações criadas a partir da branch principal(main).
+	- Desta forma é possível trabalhar com diversas frentes sem ao menos conflitar código no momento do desenvolvimento.
+	- Através deste conceito, também conseguimos criar diversos fluxos de git, como: main branch (Production), 
+homolog branch (Test/Qa), development (Development/Developer).
+	- Funciona como galhos de uma árvore que vão sendo criados através do tronco.
+- Comandos
+	- git config
+		- (Escopo) --global
+			- Este escopo é a nível de usuário. Ou seja, as configurações afetarão apenas o usuário que está logado no momento.
+		- (Escopo) --system
+			- Este escopo é a nível de sistema. Ou seja, as configurações afetarão a todos usuários cadastrados no OS.
+                - user.email 'email@email.com.br' (property)
+                        - Identifica o e-mail do usuário nas configurações do git.
+                - user.password 'senha12345' (property)
+                        - Identifica a senha do usuário nas configurações do git.
+                        - Observação: esta propriedade não é muito recomendável.
+                - user.name 'username' (property)
+                        - Identifica o nome do usuário nas configurações do git.
+                - core.editor (property)
+                        - Identifica qual o editor de texto padrão que será utilizado pelo git.
+		- Observação: Antes de utilizar qualquer property, deve-se dizer em qual escopo ela será utilizada.
+	- git init
+		- Utilizado para iniciar um repositório localmente.
+	- git add
+		- Utilizado para adicionar um arquivo sobre a area de stagging.
+		- Se passarmos 'file.txt' à frente do comando
+			- Assim conseguimos adicionar o arquivo a area de stagging.
+		- Se passarmos '.' à frente do comando
+			- Assim conseguimos adicionar vários arquivos a area de stagging.
+	- git commit
+		- Utilizado para fazer o registro de todos arquivos alterados sobre o repositório atual.
+	- git push
+		- Utilizado para enviar os arquivos ao repositório remoto.
+	- git status
+		- Utilizado para visualizar quais mudanças ocorreram no repositório local.
+	- git branch
+		- Utilizado para visualizar/criar/deletar branches.
+		- Se passarmos "nome_da_branch" à frente do comando
+			- Assim conseguimos criar uma nova branch com o nome especificado.
+		- Se passarmos "-d nome_da_branch" à frente do comando
+			- Assim conseguimos deletar uma nova branch localmente.
+		- Se passarmos "-dr nome_da_branch" à frente do comando
+			- Assim conseguimos deletar uma nova branch remotamente.
+	- git checkout
+		- Utilizado para mudar/criar branch, desfazer alterações e afins.
+		- Se passarmos "." ou "path/nome_do_arquivo" à frente do comando
+			- Com "." desfazemos todas alterações (vários arquivos) realizadas.
+			- Com "path/nome_do_arquivo" desfazemos todas alterações (único arquivo) realizadas. 
+		- Se passarmos "-b nome_da_branch" à frente do comando
+			- Assim conseguimos criar uma nova branch localmente.
+			- Para súbi-la remotamente, fazemos o seguinte comando após executar o anterior
+				- git push --set-upstream origin "nome_da_branch".
+	- git merge
+		- Utilizado para unificar as alterações de duas branches (branch fonte + branch alvo).
+		- Consideramos que estamos dentro da branch fonte e, desejamos trazer as alterações da branch alvo.
+		- Se passarmos "nome_da_branch" alvo à frente do comando.
+			- Assim conseguimos trazer as devidas alterações realizadas.
+		- Conflitos
+			- Se caso houver conflito de versões entre as duas branches, seremos notificados no CMD com "CONFLICT (content): path/nome_do_arquivo".
+			- Oque estiver entre "<<<<<<< HEAD" e "=======", é oque se encontra na branch atual.
+			-  Oque estiver entre "=======" e ">>>>>>> nome_da_branch" alvo, é oque se encontra na branch que você está pegando as alterações.
+		- Observação
+			- Após realizado a junção dos códigos é gerado um commit na timeline, diferente do comando git rebase.
+	- git rebase
+		- Utilizado para unificar as alterações de duas branches (branch fonte + branch alvo).
+		- Consideramos que estamos dentro da branch fonte e, desejamos trazer as alterações da branch alvo.
+		- Se passarmos "nome_da_branch" alvo à frente do comando.
+			- Assim conseguimos trazer as devidas alterações realizadas.
+		- Observação
+			- Diferente do merge, o comando git rebase possuí conflitos de timeline.
+			- Ele faz a junção, não só de código, como de timeline também, assim como o merge.
+			- Porém, ao invés de trazer as alterações/commits que foram feitos em suas devidas sequências ... ele conflita a timeline da branch fonte com a da branch alvo.
+			- Monta a timeline sem a sequência correta.
+	- git cherry-pick
+		- Utilizado para capturar alterações através do "hash_do_commit" que estão em outra branch.
+		- Se passarmos "hash_do_commit" alvo à frente do comando.
+			- Assim conseguimos trazer as devidas alterações realizadas sobre àquele commit para nossa branch.
+- Arquivos
+	- .gitignore (file)
+		- Utilizado na pasta root do projeto, especifica quais pastas e arquivos não devem subir para o repositório remoto.
+		- Ou melhor, você indica quais arquivos devem ser ignorados pelo git.
+	- .git (directory)
+		- Diretório de configuração do git para o devido projeto.
+		- HEAD (file)
+			- Arquivo localizado dentro do diretório git.
+			- Este arquivo diz ao git para qual branch de referência o mesmo deve apontar.
+			- Este arquivo também diz ao git onde está o arquivo main.
+			- Se você abrir o mesmo, provavelmente verá algo assim: 'ref: refs/heads/main'.
+		- config (file)
+			- Arquivo que contém a configuração do git para o usuário.
+		- main (file)
+			- Arquivo localizado dentro do diretório refs/heads.
+			- Este arquivo diz ao git qual o último commit hash da branch.
+		- objects (directory)
+			- Diretório que contém os commits.
+			- Para encontrar o seu commit, verifique os 2 primeiros digitos do hash do mesmo.
+			- Após, tente encontrar o diretório dentro desta pasta que contenha o mesmo. O nome do diretório será os
+ dois primeiros digitos do hash.
+		- heads (directory)
+			- Diretório localizado dentro do diretório refs/.
+			- Para encontrar as branches criadas pelo desenvolvedor.
+		- tags (directory)
+			- Diretório localizado dentro do diretório refs/.
+			- Para encontrar as tags criadas pelo desenvolvedor.
